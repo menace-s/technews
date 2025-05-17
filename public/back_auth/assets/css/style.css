@@ -1,0 +1,239 @@
+/* css/style.css */
+:root {
+    --navbar-height: 60px; /* Hauteur de votre navbar, ajustez si besoin */
+    --sidebar-width: 240px; /* Largeur de votre sidebar */
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef;
+    /* Le padding-top sur le body n'est plus nécessaire si main-content le gère */
+  }
+  
+  .navbar-custom {
+    position: fixed; /* Rendre la navbar fixe en haut */
+    top: 0;
+    left: 0; /* S'assurer qu'elle s'étend sur toute la largeur */
+    right: 0;
+    height: var(--navbar-height);
+    background-color: #fff;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    z-index: 1030; /* z-index élevé pour être au-dessus des autres éléments */
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: var(--navbar-height); /* La sidebar commence SOUS la navbar */
+    bottom: 0; /* S'étend jusqu'au bas de la fenêtre */
+    left: calc(-1 * var(--sidebar-width)); /* Cachée par défaut hors de l'écran */
+    width: var(--sidebar-width);
+    z-index: 1020; /* Inférieur à la navbar, mais supérieur au contenu si besoin */
+    padding: 1rem 0; /* Padding interne pour le contenu de la sidebar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: #f8f9fa;
+    transition: left 0.3s ease-in-out; /* Transition sur la propriété 'left' */
+    overflow-y: auto; /* Pour le défilement si le contenu de la sidebar est long */
+  }
+  
+  .sidebar.active {
+    left: 0; /* La sidebar devient visible */
+  }
+  
+  .main-content {
+    padding-top: var(--navbar-height); /* Espace pour la navbar fixe en haut */
+    padding-left: 20px; /* Padding interne pour le contenu */
+    padding-right: 20px;
+    padding-bottom: 20px;
+    transition: margin-left 0.3s ease-in-out;
+    /* La margin-left sera ajoutée dynamiquement par la classe .sidebar-active */
+  }
+  
+  .main-content.sidebar-active {
+    margin-left: var(--sidebar-width); /* Pousse le contenu principal lorsque la sidebar est active */
+  }
+  
+  .user-profile {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+  }
+  
+  .user-profile img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .user-profile h5 {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .user-profile p {
+      font-size: 0.8rem;
+      color: #6c757d;
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    padding: 0.75rem 1.5rem; /* Ajuster le padding pour un meilleur espacement */
+  }
+  
+  .sidebar .nav-link .bi {
+    margin-right: 10px; /* Plus d'espace pour l'icône */
+    color: #555;
+    font-size: 1.1rem; /* Icônes légèrement plus grandes */
+  }
+  
+  .sidebar .nav-link.active {
+    color: #fff;
+    background-color: #08A789;
+  }
+  
+  .sidebar .nav-link:hover .bi,
+  .sidebar .nav-link:hover {
+    color: #08A789;
+    background-color: #e9ecef; /* Fond plus distinct au survol */
+  }
+  
+  .sidebar .nav-link.active .bi {
+      color: #fff;
+  }
+  
+  /* Styles pour les sous-menus */
+  .sidebar .collapse .nav-link,
+  .sidebar .collapsing .nav-link {
+      padding-left: 2.5rem; /* Indentation pour les sous-éléments */
+      font-size: 0.9rem;
+  }
+  .sidebar .collapse .nav-link:hover,
+  .sidebar .collapsing .nav-link:hover {
+      background-color: #e0e0e0;
+  }
+  
+  
+  /* Ajustements pour les petits écrans */
+  @media (max-width: 767.98px) {
+    .sidebar {
+      /* Sur mobile, la sidebar est cachée (left: calc(-1 * var(--sidebar-width));) */
+      /* Quand .active, elle vient par-dessus ou pousse le contenu */
+      z-index: 1035; /* Doit être au-dessus de la navbar si elle se superpose */
+    }
+  
+    .sidebar.active {
+      left: 0;
+      /* Optionnel: si la sidebar doit couvrir la navbar sur mobile quand elle s'ouvre */
+      /* top: 0; */
+      /* height: 100vh; */
+    }
+  
+    .main-content {
+      margin-left: 0 !important; /* Assure que le contenu prend toute la largeur */
+    }
+  
+    .main-content.sidebar-active {
+      /* Si la sidebar mobile se superpose, le contenu ne doit pas avoir de marge.
+         Si elle devait pousser le contenu, il faudrait margin-left: var(--sidebar-width);
+         La configuration actuelle suggère une superposition ou une sidebar qui ne pousse pas le contenu sur mobile. */
+      margin-left: 0;
+    }
+  
+    /* Bouton pour la navbar sur mobile */
+    #sidebarToggle {
+      display: block !important; /* S'assurer qu'il est visible */
+    }
+  }
+  
+  /* Styles restants (page-title, cards, search-bar, footer, auth-wrapper, etc.) */
+  /* Vérifiez qu'ils n'ont pas de positionnements conflictuels. */
+  
+  .page-title {
+      color: #343a40;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+  }
+  
+  .card-icon {
+      font-size: 2.5rem;
+      color: #08A789;
+      opacity: 0.7;
+  }
+  
+  .stat-card h5 {
+      font-size: 1.5rem;
+      font-weight: 700;
+  }
+  
+  .stat-card p {
+      font-size: 0.9rem;
+      color: #6c757d;
+  }
+  
+  .search-bar .form-control {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+  }
+  .search-bar .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      background-color: #08A789;
+      border-color: #08A789;
+      color: white;
+  }
+  .search-bar .btn:hover {
+      background-color: #067c68;
+      border-color: #067c68;
+  }
+  
+  .footer {
+      background-color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6c757d;
+      border-top: 1px solid #dee2e6;
+      margin-top: 2rem; /* S'assure qu'il y a de l'espace avant le footer */
+  }
+  
+  .auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+  
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+  }
+  
+  .form-control:focus {
+      border-color: #08A789;
+      box-shadow: 0 0 0 0.25rem rgba(8, 167, 137, 0.25);
+  }
+  .btn-primary {
+      background-color: #08A789;
+      border-color: #08A789;
+  }
+  .btn-primary:hover {
+      background-color: #067c68;
+      border-color: #067c68;
+  }
+  
+  #sidebarToggle {
+      color: #333;
+  }
+  
+  .navbar-nav .nav-link .bi {
+      font-size: 1.2rem;
+  }
+  
+  .dropdown-item:active {
+      background-color: #08A789;
+  }
