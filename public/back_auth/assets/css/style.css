@@ -2,238 +2,282 @@
 :root {
     --navbar-height: 60px; /* Hauteur de votre navbar, ajustez si besoin */
     --sidebar-width: 240px; /* Largeur de votre sidebar */
-  }
-  
-  body {
+    --primary-color: #08A789; /* Couleur principale de votre thème */
+    --primary-color-darker: #067c68; /* Nuance plus foncée pour le survol */
+    --text-on-primary: #fff; /* Couleur du texte sur fond primaire */
+}
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #e9ecef;
-    /* Le padding-top sur le body n'est plus nécessaire si main-content le gère */
-  }
-  
-  .navbar-custom {
-    position: fixed; /* Rendre la navbar fixe en haut */
+}
+
+.navbar-custom {
+    position: fixed;
     top: 0;
-    left: 0; /* S'assurer qu'elle s'étend sur toute la largeur */
+    left: 0;
     right: 0;
     height: var(--navbar-height);
     background-color: #fff;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-    z-index: 1030; /* z-index élevé pour être au-dessus des autres éléments */
-  }
-  
-  .sidebar {
+    z-index: 1030;
+}
+
+.sidebar {
     position: fixed;
-    top: var(--navbar-height); /* La sidebar commence SOUS la navbar */
-    bottom: 0; /* S'étend jusqu'au bas de la fenêtre */
-    left: calc(-1 * var(--sidebar-width)); /* Cachée par défaut hors de l'écran */
+    top: var(--navbar-height);
+    bottom: 0;
+    left: calc(-1 * var(--sidebar-width));
     width: var(--sidebar-width);
-    z-index: 1020; /* Inférieur à la navbar, mais supérieur au contenu si besoin */
-    padding: 1rem 0; /* Padding interne pour le contenu de la sidebar */
+    z-index: 1020;
+    padding: 1rem 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
     background-color: #f8f9fa;
-    transition: left 0.3s ease-in-out; /* Transition sur la propriété 'left' */
-    overflow-y: auto; /* Pour le défilement si le contenu de la sidebar est long */
-  }
-  
-  .sidebar.active {
-    left: 0; /* La sidebar devient visible */
-  }
-  
-  .main-content {
-    padding-top: var(--navbar-height); /* Espace pour la navbar fixe en haut */
-    padding-left: 20px; /* Padding interne pour le contenu */
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.main-content {
+    padding-top: var(--navbar-height);
+    padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
     transition: margin-left 0.3s ease-in-out;
-    /* La margin-left sera ajoutée dynamiquement par la classe .sidebar-active */
-  }
-  
-  .main-content.sidebar-active {
-    margin-left: var(--sidebar-width); /* Pousse le contenu principal lorsque la sidebar est active */
-  }
-  
-  .user-profile {
+    min-height: calc(100vh - var(--navbar-height)); /* Assure que le contenu prend au moins la hauteur de la fenêtre moins la navbar */
+    display: flex; /* Pour aider à positionner le footer en bas si besoin */
+    flex-direction: column; /* Pour aider à positionner le footer en bas si besoin */
+}
+
+.main-content.sidebar-active {
+    margin-left: var(--sidebar-width);
+}
+
+.main-content > .container-fluid { /* Cible le container-fluid direct pour le flex-grow */
+    flex-grow: 1; /* Permet au contenu de pousser le footer vers le bas */
+}
+
+
+.user-profile {
     padding: 1rem;
     text-align: center;
     border-bottom: 1px solid #dee2e6;
     margin-bottom: 1rem;
-  }
-  
-  .user-profile img {
+}
+
+.user-profile img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     margin-bottom: 0.5rem;
-  }
-  
-  .user-profile h5 {
+    object-fit: cover; /* Assure que l'image couvre bien sans être déformée */
+}
+
+.user-profile h5 {
     margin-bottom: 0.25rem;
     font-size: 1rem;
     color: #333;
-  }
-  
-  .user-profile p {
-      font-size: 0.8rem;
-      color: #6c757d;
-  }
-  
-  .sidebar .nav-link {
+}
+
+.user-profile p {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.sidebar .nav-link {
     font-weight: 500;
     color: #333;
-    padding: 0.75rem 1.5rem; /* Ajuster le padding pour un meilleur espacement */
-  }
-  
-  .sidebar .nav-link .bi {
-    margin-right: 10px; /* Plus d'espace pour l'icône */
+    padding: 0.75rem 1.5rem;
+}
+
+.sidebar .nav-link .bi {
+    margin-right: 10px;
     color: #555;
-    font-size: 1.1rem; /* Icônes légèrement plus grandes */
-  }
-  
-  .sidebar .nav-link.active {
-    color: #fff;
-    background-color: #08A789;
-  }
-  
-  .sidebar .nav-link:hover .bi,
-  .sidebar .nav-link:hover {
-    color: #08A789;
-    background-color: #e9ecef; /* Fond plus distinct au survol */
-  }
-  
-  .sidebar .nav-link.active .bi {
-      color: #fff;
-  }
-  
-  /* Styles pour les sous-menus */
-  .sidebar .collapse .nav-link,
-  .sidebar .collapsing .nav-link {
-      padding-left: 2.5rem; /* Indentation pour les sous-éléments */
-      font-size: 0.9rem;
-  }
-  .sidebar .collapse .nav-link:hover,
-  .sidebar .collapsing .nav-link:hover {
-      background-color: #e0e0e0;
-  }
-  
-  
-  /* Ajustements pour les petits écrans */
-  @media (max-width: 767.98px) {
+    font-size: 1.1rem;
+}
+
+.sidebar .nav-link.active {
+    color: var(--text-on-primary);
+    background-color: var(--primary-color);
+}
+
+.sidebar .nav-link:hover .bi,
+.sidebar .nav-link:hover {
+    color: var(--primary-color);
+    background-color: #e9ecef;
+}
+
+.sidebar .nav-link.active .bi {
+    color: var(--text-on-primary);
+}
+
+.sidebar .collapse .nav-link,
+.sidebar .collapsing .nav-link {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+}
+.sidebar .collapse .nav-link:hover,
+.sidebar .collapsing .nav-link:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 767.98px) {
     .sidebar {
-      /* Sur mobile, la sidebar est cachée (left: calc(-1 * var(--sidebar-width));) */
-      /* Quand .active, elle vient par-dessus ou pousse le contenu */
-      z-index: 1035; /* Doit être au-dessus de la navbar si elle se superpose */
+        z-index: 1035;
     }
-  
     .sidebar.active {
-      left: 0;
-      /* Optionnel: si la sidebar doit couvrir la navbar sur mobile quand elle s'ouvre */
-      /* top: 0; */
-      /* height: 100vh; */
+        left: 0;
     }
-  
     .main-content {
-      margin-left: 0 !important; /* Assure que le contenu prend toute la largeur */
+        margin-left: 0 !important;
     }
-  
     .main-content.sidebar-active {
-      /* Si la sidebar mobile se superpose, le contenu ne doit pas avoir de marge.
-         Si elle devait pousser le contenu, il faudrait margin-left: var(--sidebar-width);
-         La configuration actuelle suggère une superposition ou une sidebar qui ne pousse pas le contenu sur mobile. */
-      margin-left: 0;
+        margin-left: 0;
     }
-  
-    /* Bouton pour la navbar sur mobile */
     #sidebarToggle {
-      display: block !important; /* S'assurer qu'il est visible */
+        display: block !important;
     }
-  }
-  
-  /* Styles restants (page-title, cards, search-bar, footer, auth-wrapper, etc.) */
-  /* Vérifiez qu'ils n'ont pas de positionnements conflictuels. */
-  
-  .page-title {
-      color: #343a40;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-  }
-  
-  .card-icon {
-      font-size: 2.5rem;
-      color: #08A789;
-      opacity: 0.7;
-  }
-  
-  .stat-card h5 {
-      font-size: 1.5rem;
-      font-weight: 700;
-  }
-  
-  .stat-card p {
-      font-size: 0.9rem;
-      color: #6c757d;
-  }
-  
-  .search-bar .form-control {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-  }
-  .search-bar .btn {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      background-color: #08A789;
-      border-color: #08A789;
-      color: white;
-  }
-  .search-bar .btn:hover {
-      background-color: #067c68;
-      border-color: #067c68;
-  }
-  
-  .footer {
-      background-color: #fff;
-      padding: 1rem 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #6c757d;
-      border-top: 1px solid #dee2e6;
-      margin-top: 2rem; /* S'assure qu'il y a de l'espace avant le footer */
-  }
-  
-  .auth-wrapper {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-  }
-  
-  .auth-card {
-    width: 100%;
-    max-width: 420px;
-    padding: 25px;
-  }
-  
-  .form-control:focus {
-      border-color: #08A789;
-      box-shadow: 0 0 0 0.25rem rgba(8, 167, 137, 0.25);
-  }
-  .btn-primary {
-      background-color: #08A789;
-      border-color: #08A789;
-  }
-  .btn-primary:hover {
-      background-color: #067c68;
-      border-color: #067c68;
-  }
-  
-  #sidebarToggle {
-      color: #333;
-  }
-  
-  .navbar-nav .nav-link .bi {
-      font-size: 1.2rem;
-  }
-  
-  .dropdown-item:active {
-      background-color: #08A789;
-  }
+}
+
+.page-title {
+    color: #343a40;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    opacity: 0.7;
+}
+
+.stat-card h5 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stat-card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Styles pour la barre de recherche (déjà présents) */
+.search-bar .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.search-bar .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-on-primary);
+}
+.search-bar .btn:hover {
+    background-color: var(--primary-color-darker);
+    border-color: var(--primary-color-darker);
+}
+
+/* Footer */
+.footer {
+    background-color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+    margin-top: auto; /* Pousse le footer en bas si .main-content est flex-direction column */
+}
+
+/* Styles pour les pages d'authentification (déjà présents) */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 25px;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important; /* Ajout d'un box-shadow plus prononcé */
+}
+
+/* Styles pour les formulaires et boutons (ajustés) */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(8, 167, 137, 0.25); /* Couleur de l'ombre de focus basée sur --primary-color */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-on-primary) !important; /* Assure la visibilité du texte/icône */
+}
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-color-darker);
+    border-color: var(--primary-color-darker);
+    color: var(--text-on-primary) !important;
+}
+
+/* Classes de texte et liens utilisant la couleur primaire du thème */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+a.text-primary:hover, a.text-primary:focus {
+    color: var(--primary-color-darker) !important;
+}
+
+/* Styles pour les icônes dans la navbar et dropdown (déjà présents) */
+#sidebarToggle {
+    color: #333;
+}
+.navbar-nav .nav-link .bi {
+    font-size: 1.2rem;
+}
+.dropdown-item:active {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary); /* Assurer que le texte est visible */
+}
+
+
+/* Styles spécifiques pour la page de profil */
+.profile-avatar-wrapper {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.profile-avatar-wrapper .img-fluid {
+    width: 150px; /* Taille fixe pour l'avatar */
+    height: 150px;
+    object-fit: cover; /* Assure que l'image couvre bien sans être déformée */
+    border: 3px solid #dee2e6; /* Petite bordure optionnelle */
+}
+.profile-avatar-wrapper .form-control-sm { /* Ajustement pour le champ de téléversement sous l'avatar */
+    max-width: 200px;
+    margin: 0.5rem auto 0;
+}
+
+/* Ajustement pour les card-headers pour utiliser la couleur primaire */
+.card-header .text-primary {
+    color: var(--primary-color) !important;
+}
+/* Fin des styles spécifiques pour la page de profil */
+
+/* Ajustement pour le texte des placeholders (plus clair) */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #adb5bd; /* Couleur Bootstrap pour placeholder */
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #adb5bd;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #adb5bd;
+}
