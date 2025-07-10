@@ -14,7 +14,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('back_auth/assets/profile/'.Auth::user()->image) }}" alt="User" class="rounded-circle" width="30" height="30">
+                        <img src="{{ Auth::user()->avatarUrl() }}" alt="User" class="rounded-circle" width="30" height="30">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person-circle me-2"></i>Profil</a></li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,29 +28,37 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // 1. Remplit les champs validés (name, email, etc.)
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // 2. Si l'email a changé, on réinitialise la vérification
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
+
+        // 3. On gère la nouvelle image de profil
         if ($request->hasFile('image')) {
-            if(file_exists(public_path('back_auth/assets/profile'.$request->user()->image)) AND !empty($request->user()->image)) {
-                unlink(public_path(('back_auth/assets/profile'.$request->user()->image)) AND !empty($request->user()->image));
+            // 3a. On supprime l'ancienne image s'il y en a une
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
             }
-            $imagePath = $request->file('image')->store('images', 'public');
-            $request->user()->image = 'storage/' . $imagePath;
+
+            // 3b. On enregistre la nouvelle image dans 'public/images'
+            // et on récupère le chemin (ex: 'images/nouveau_nom.jpg')
+            $path = $request->file('image')->store('images', 'public');
+
+            // 3c. On sauvegarde ce nouveau chemin dans la base de données
+            $user->image = $path;
         }
-        $ext= $request->file('image')->extension();
-        $file_name = date('YmdHis') . '.' . $ext;
-        $request->file('image')->move(public_path('back_auth/assets/profile'), $file_name);
-        $request->user()->image = $file_name;
-        $request->user()->name= $request->name;
-        $request->user()->email = $request->email;
 
-        $request->user()->save();
+        // 4. On sauvegarde toutes les modifications sur l'utilisateur
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // 5. On redirige avec un message de succès
+        return Redirect::route('profile.edit')->with('status', 'profile modifié avec succès');
     }
+
 
     /**
      * Delete the user's account.

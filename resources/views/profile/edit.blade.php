@@ -58,7 +58,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 text-center profile-avatar-wrapper mb-3 mb-md-0">
-                    <img src="{{ asset('back_auth/assets/profile/'.Auth::user()->image) }}" {{-- Remplacer par Auth::user()->image si disponible --}}
+                    <img src="{{ Auth::user()->avatarUrl() }}" {{-- Remplacer par Auth::user()->image si disponible --}}
                          alt="Avatar de l'utilisateur"
                          class="img-fluid rounded-circle mb-2">
                     <p class="text-muted small mb-0">Administrateur</p>
@@ -95,7 +95,7 @@
 
                     <div class="row">
                         <div class="col-md-4 text-center profile-avatar-wrapper mb-3">
-                            <img src="{{ asset('back_auth/assets/profile/'.Auth::user()->image) }}" style="width:120px; height:120px; object-fit:cover;">
+                            <img src="{{ Auth::user()->avatarUrl() }}" style="width:120px; height:120px; object-fit:cover;">
                             <label for="avatarModal" class="form-label">Changer l'avatar</label>
                             <input type="file" class="form-control form-control-sm @error('image') is-invalid @enderror" id="avatarModal" name="image">
                              @error('image') {{-- Si vous n'utilisez pas d'error bag spécifique pour ce formulaire --}}

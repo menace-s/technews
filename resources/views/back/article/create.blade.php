@@ -14,7 +14,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="title" class="form-label">Titre de l'article</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Titre de l'article" required>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Titre de l'article" value="{{ old('title') }}" required>
                     </div>
                     <div class="col-md-4">
                         <label for="category_id" class="form-label">Catégorie</label>
@@ -27,13 +27,13 @@
                     </div>
                     <div class="col-md-4">
                         <label for="image" class="form-label">Uploader une image</label>
-                        <input type="file" name="image" id="image" class="form-control">
+                        <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="description" id="description" rows="6" class="form-control" placeholder="Entrez le contenu de l'article..." required></textarea>
+                    <textarea name="description" id="description" rows="6" class="form-control" placeholder="Entrez le contenu de l'article..." value="{{ old('description') }}" required></textarea>
                 </div>
 
                 <div class="row mb-4">

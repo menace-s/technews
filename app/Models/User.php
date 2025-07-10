@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+     public function avatarUrl(): string
+    {
+        // On suppose que la colonne de l'image dans ta table 'users' s'appelle 'avatar' ou 'image'.
+        // Adapte 'avatar' si le nom de ta colonne est différent.
+        return $this->image ? Storage::url($this->image) : '/images/default-avatar.png';
     }
 }

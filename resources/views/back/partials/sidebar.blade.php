@@ -1,5 +1,5 @@
 <nav id="sidebar" class="sidebar active">  <div class="sidebar-content-wrapper"> <div class="user-profile">
-                <img src="{{ asset('back_auth/assets/profile/'.Auth::user()->image) }}" alt="User Avatar">
+                <img src="{{ Auth::user()->avatarUrl() }}" alt="User Avatar">
                 <h5>{{Auth::user()->name}}</h5>
                 <p>Administrateur</p>
             </div>

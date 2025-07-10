@@ -6,18 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
-    use HasFactory, HasSlug; // Correction : On utilise le trait 'HasSlug'
+    use HasFactory, HasSlug;
 
-    /**
-     * Les attributs qui peuvent être assignés en masse.
-     * J'ai corrigé 'isSharale' en 'is_shareable' et mis les autres en snake_case pour la cohérence.
-     * N'oubliez pas de mettre à jour votre fichier de migration si vous appliquez ces changements.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'title',
         'slug',
@@ -30,25 +24,48 @@ class Article extends Model
         'author_id'
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_shareable' => 'boolean',
+        'is_commentable' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime', // C'est bien de caster celle-ci aussi
+    ];
+    
+    // ... tes fonctions getSlugOptions(), getRouteKeyName(), imageUrl() ...
+
     /**
-     * Retourne les options pour le slug.
-     * Cette fonction est nécessaire pour le trait HasSlug.
+     * Définit la relation "un article appartient à un auteur".
+     * C'est la méthode qu'il te manquait !
      */
-    public function getSlugOptions(): SlugOptions
+    public function author()
     {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title') // Génère le slug à partir du champ 'title'
-            ->saveSlugsTo('slug');      // Sauvegarde le slug dans le champ 'slug'
+        // On suppose que tes auteurs sont dans le modèle User.
+        return $this->belongsTo(\App\Models\User::class, 'author_id');
     }
 
     /**
-     * Définit la clé de route pour le modèle.
-     * Permet d'utiliser le slug dans les URLs au lieu de l'ID.
-     *
-     * @return string
+     * Définit la relation "un article appartient à une catégorie".
      */
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class);
+    }
+    
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
+
     public function getRouteKeyName()
     {
-        return 'slug'; // Correction pour utiliser le slug dans les URLs
+        return 'slug';
+    }
+
+    public function imageUrl(): string
+    {
+        return $this->image ? Storage::url($this->image) : '/images/default-article.jpg';
     }
 }

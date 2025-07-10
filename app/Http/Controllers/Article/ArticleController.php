@@ -15,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('back.article.index');
+        $articles = Article::all();
+        return view('back.article.index',compact('articles'));
     }
 
     /**
@@ -35,9 +36,30 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreArticleRequest $request)
-    {
-        //
+{
+    // 1. Récupère toutes les données validées dans un tableau.
+    $data = $request->validated();
+
+    // 2. Gère le téléversement de l'image si elle est présente et valide.
+    if ($request->hasFile('image')) {
+        // 'articles' est le nom du dossier de destination dans `storage/app/public`
+        $path = $request->file('image')->store('articles', 'public');
+        
+        // 3. Ajoute le chemin de l'image au tableau de données.
+        $data['image'] = $path;
     }
+
+    // 4. Ajoute l'ID de l'auteur authentifié.
+    $data['author_id'] = auth()->id();
+
+    // 5. Crée l'article en utilisant le tableau de données propre et complet.
+    //    Assurez-vous que tous les noms de clés dans $data correspondent
+    //    aux noms de colonnes dans votre table et dans le $fillable de votre modèle Article.
+    Article::create($data);
+
+    // 6. Redirige vers la page de liste avec un message de succès.
+    return redirect()->route('articles.index')->with('success', 'Article créé avec succès !');
+}
 
     /**
      * Display the specified resource.
