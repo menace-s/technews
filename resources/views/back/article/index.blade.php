@@ -40,9 +40,9 @@
                     <tbody>
                         @forelse($articles as $article)
                             <tr>
-                                <td>{{ $article->id }}</td>
+                                <td>ART-000{{ $article->id }}</td>
                                 <td>
-                                    <img src="{{ $article->imageUrl() }}" alt="Image de {{ $article->title }}" class="rounded" width="60">
+                                    <img src="{{ $article->imageUrl() }}" alt="Image de {{ $article->title }}" class="rounded" width="60" height="40">
                                 </td>
                                 <td>{{ $article->title }}</td>
                                 <td>{{ $article->category?->name ?? 'N/A' }}</td>
@@ -55,7 +55,7 @@
                                 <td>
                                     @if ($article->author)
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ $article->author->avatarUrl() }}" alt="Avatar de {{ $article->author->name }}" class="rounded-circle me-2" width="40">
+                                            <img src="{{ $article->author->avatarUrl() }}" alt="Avatar de {{ $article->author->name }}" class="rounded-circle me-2" width="40" height="40">
                                             <span>{{ $article->author->name }}</span>
                                         </div>
                                     @else
@@ -70,6 +70,10 @@
                                             <i class="bi bi-three-dots-vertical"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a href="{{ route('articles.show', $article) }}" class="dropdown-item">
+                                                    <i class="bi bi-eye-fill me-2"></i>Voir
+                                                </a>
                                             <li><a href="{{ route('articles.edit', $article) }}" class="dropdown-item"><i class="bi bi-pencil-square me-2"></i>Modifier</a></li>
                                             <li>
                                                 <form action="{{ route('articles.destroy', $article) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');">
