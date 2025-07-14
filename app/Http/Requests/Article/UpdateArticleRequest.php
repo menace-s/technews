@@ -26,6 +26,7 @@ class UpdateArticleRequest extends FormRequest
             'is_commentable' => 'boolean',
             'is_shareable' => 'boolean',
             'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable|string',
         ];
     }
 }

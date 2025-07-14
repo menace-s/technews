@@ -77,6 +77,16 @@
                             <span class="badge bg-info rounded-pill">{{ $article->category?->name ?? 'N/A' }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tags
+                            <div>
+                                @if ($article->tags->isNotEmpty())
+                                    @foreach ($article->tags as $tag)
+                                        <span class="badge bg-secondary me-1">{{ $tag->name }}</span>
+                                    @endforeach
+                                @else
+                                    <span class="text-muted">Aucun tag</span>
+                                @endif
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
                             Publication
                             <x-status-badge :active="$article->is_active" />
                         </li>

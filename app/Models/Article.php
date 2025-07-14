@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Support\Facades\Storage;
+use Conner\Tagging\Taggable;
 
 class Article extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, Taggable;
 
     protected $fillable = [
         'title',
