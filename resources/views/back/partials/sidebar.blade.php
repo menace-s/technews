@@ -14,8 +14,8 @@
                         <i class="bi bi-file-earmark-text-fill"></i> Articles
                     </a>
                     <ul class="collapse list-unstyled" id="articlesSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('articles.index') }}">Tous les articles</a></li>
-                        <li><a class="nav-link ms-4" href="{{ route('articles.create') }}">Ajouter un article</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('article.index') }}">Tous les articles</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('article.create') }}">Ajouter un article</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -23,7 +23,7 @@
                         <i class="bi bi-tags-fill"></i> Catégories
                     </a>
                     <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('categories.index')}}">Toutes les catégories</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('category.index')}}">Toutes les catégories</a></li>
                     </ul>
                 </li>
                  <li class="nav-item">
@@ -31,8 +31,7 @@
                         <i class="bi bi-people-fill"></i> Auteurs
                     </a>
                     <ul class="collapse list-unstyled" id="authorsSubmenu">
-                        <li><a class="nav-link ms-4" href="all-author.html">Tous les auteurs</a></li>
-                        <li><a class="nav-link ms-4" href="add-author.html">Ajouter un auteur</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('author.index') }}">Tous les auteurs</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

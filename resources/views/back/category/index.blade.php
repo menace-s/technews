@@ -60,7 +60,7 @@
                                             </li>
                                             <li>
                                                 
-                                                    <form action="{{ route("categories.destroy",$category) }}" method="POST">
+                                                    <form action="{{ route("category.destroy",$category) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn text-danger dropdown-item">
@@ -82,7 +82,7 @@
                                             <h5 class="modal-title" id="editCategoryModalLabel{{ $category->id }}">Modifier la catégorie "{{ $category->name }}"</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                                         </div>
-                                        <form action="{{ route('categories.update', $category->id) }}" method="POST">
+                                        <form action="{{ route('category.update', $category->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
@@ -131,7 +131,7 @@
                 <h5 class="modal-title" id="addCategoryModalLabel">Ajouter une nouvelle catégorie</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('categories.store') }}" method="POST">
+            <form action="{{ route('category.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

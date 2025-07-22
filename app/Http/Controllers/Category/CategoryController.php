@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         Category::create($request->validated());
-        return redirect()->route('categories.index')->with('success', 'La catégorie a été créée avec succès');
+        return redirect()->route('category.index')->with('success', 'La catégorie a été créée avec succès');
     }
 
     /**
