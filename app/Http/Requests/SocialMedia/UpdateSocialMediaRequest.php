@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SocialMedia;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreSocialMediaRequest extends FormRequest
+class UpdateSocialMediaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,9 @@ class StoreSocialMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' =>'required|string|max:255',
+            'lien' => 'nullable|string|max:255',
+            'icon' => 'nullable|string|max:255',
         ];
     }
 }

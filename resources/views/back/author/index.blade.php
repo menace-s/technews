@@ -1,4 +1,5 @@
-@extends('back.app') @section('title', 'Auteurs - Admin Dashboard')
+@extends('back.app') 
+@section('title', 'Auteurs - Admin Dashboard')
 @section('dashboard-content')
 
 <div class="container-fluid pt-4 px-4">
@@ -90,7 +91,7 @@
                             class="modal fade"
                             id="editAuthorModal{{ $author->id }}"
                             tabindex="-1"
-                            aria-labelledby="editAuthorModalLabel1"
+                            aria-labelledby="editAuthorModalLabel{{ $author->id }}"
                             aria-hidden="true"
                         >
                             <div class="modal-dialog modal-dialog-centered">

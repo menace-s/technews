@@ -19,13 +19,20 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#categoriesSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="categoriesSubmenu">
-                        <i class="bi bi-tags-fill"></i> Catégories
+                    <a class="nav-link" href="all-comments.html">
+                        <i class="bi bi-chat-dots-fill"></i> Commentaires
                     </a>
-                    <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('category.index')}}">Toutes les catégories</a></li>
-                    </ul>
                 </li>
+                @can('admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categoriesSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="categoriesSubmenu">
+                            <i class="bi bi-tags-fill"></i> Catégories
+                        </a>
+                        <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                            <li><a class="nav-link ms-4" href="{{ route('category.index')}}">Toutes les catégories</a></li>
+                        </ul>
+                    </li>
+                
                  <li class="nav-item">
                     <a class="nav-link" href="#authorsSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="authorsSubmenu">
                         <i class="bi bi-people-fill"></i> Auteurs
@@ -34,17 +41,13 @@
                         <li><a class="nav-link ms-4" href="{{ route('author.index') }}">Tous les auteurs</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="all-comments.html">
-                        <i class="bi bi-chat-dots-fill"></i> Commentaires
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#socialSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="socialSubmenu">
                          <i class="bi bi-share-fill"></i> Médias Sociaux
                     </a>
                      <ul class="collapse list-unstyled" id="socialSubmenu">
-                        <li><a class="nav-link ms-4" href="all-social-media.html">Tous les médias</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('social-media.index') }}">Tous les médias</a></li>
                         <li><a class="nav-link ms-4" href="add-social-media.html">Ajouter un média</a></li>
                     </ul>
                 </li>
@@ -54,10 +57,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="settings.html">
+                    <a class="nav-link" href="{{ route('settings.index') }}">
                         <i class="bi bi-gear-fill"></i> Paramètres
                     </a>
                 </li>
+            @endcan
             </ul>
             </div>
         </div>

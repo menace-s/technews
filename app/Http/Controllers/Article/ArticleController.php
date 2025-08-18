@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Article;
 
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,13 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $user=Auth::user();
+        if($user->role == 'admin'){
+            $articles = Article::all();
+        } else {
+            // Si l'utilisateur n'est pas admin, on récupère uniquement ses articles
+            $articles = Article::where('author_id', $user->id)->get();
+        }
         return view('back.article.index',compact('articles'));
     }
 
@@ -38,8 +45,9 @@ class ArticleController extends Controller
      */
 public function store(StoreArticleRequest $request)
 {
+    // dd($request);
     $data = $request->validated();
-
+    dd($data);
     if ($request->hasFile('image')) {
         $path = $request->file('image')->store('articles', 'public');
         $data['image'] = $path;
@@ -57,7 +65,7 @@ public function store(StoreArticleRequest $request)
         $article->tag($tags); // On utilise la méthode du package sur l'objet $article
     }
 
-    return redirect()->route('articles.index')->with('success', 'Article créé avec succès !');
+    return redirect()->route('article.index')->with('success', 'Article créé avec succès !');
 }
 
     /**
@@ -116,7 +124,7 @@ public function store(StoreArticleRequest $request)
         }
 
         // 5. On redirige avec un message de succès.
-        return redirect()->route('articles.index')->with('success', 'Article modifié avec succès !');
+        return redirect()->route('article.index')->with('success', 'Article modifié avec succès !');
     }
 
     /**
