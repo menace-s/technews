@@ -23,6 +23,9 @@
                     <div class="col-md-4">
                         <label for="title" class="form-label">Titre de l'article</label>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Titre de l'article" value="{{ isset($article) ? old('title',$article->title) : old('title') }}" required>
+                        @error('title')
+                            <span class="text-danger mt-2">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="col-md-4">
                         <label for="category_id" class="form-label">Catégorie</label>
@@ -48,6 +51,9 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea name="description" id="description" rows="6" class="form-control" placeholder="Entrez le contenu de l'article..." value="{{ old('description') }}" required>{{ old('description', $article->description ?? '') }}</textarea>
+                    @error('description')
+                            <span class="text-danger mt-2">{{ $message }}</span>
+                    @enderror
                 </div>
                                 {{-- On vérifie non seulement que l'article existe, mais aussi qu'il a bien des tags --}}
                 @if (isset($article) && $article->tags->isNotEmpty())

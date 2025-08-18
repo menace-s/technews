@@ -17,11 +17,10 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         $user=Auth::user();
-        $userRoles = explode(',', $user->role);
-        if($user && in_array('admin', $userRoles)){
-
+        if ($user && $user->hasRole('admin')) {
             return $next($request);
         }
+        
         abort(403, 'Accès interdit : Vous devez être un administrateur pour accéder à cette ressource.');
     }
 }

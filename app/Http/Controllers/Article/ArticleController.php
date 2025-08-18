@@ -18,7 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         $user=Auth::user();
-        if($user->role == 'admin'){
+        if($user->hasRole('admin')) {
+            // dd($user->roles);
             $articles = Article::all();
         } else {
             // Si l'utilisateur n'est pas admin, on récupère uniquement ses articles

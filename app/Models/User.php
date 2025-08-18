@@ -23,7 +23,6 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
-        'role'
     ];
 
     /**
@@ -53,5 +52,13 @@ class User extends Authenticatable
         // On suppose que la colonne de l'image dans ta table 'users' s'appelle 'avatar' ou 'image'.
         // Adapte 'avatar' si le nom de ta colonne est différent.
         return $this->image ? Storage::url($this->image) : '/images/default-avatar.png';
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->where('name', $roleName)->exists();
     }
 }
