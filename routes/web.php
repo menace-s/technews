@@ -1,20 +1,21 @@
 <?php
 
+use App\Http\Controllers\testController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [testController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('back.dashboard');
-})->middleware(['auth', 'verified','CheckRole:admin,author'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified','CheckRole:admin,author'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
