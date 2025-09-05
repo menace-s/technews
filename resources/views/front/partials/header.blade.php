@@ -1,6 +1,6 @@
 {{-- 1. On ajoute "relative" ici pour que le menu "absolute" se positionne par rapport au header --}}
 <header x-data="{ open: false }" class="relative p-4 mb-4">
-    <div class="fixed top-3 right-0 left-0 container mx-auto px-6">
+    <div class="fixed z-50 top-3 right-0 left-0 container mx-auto px-6">
         <nav class="bg-white/80 backdrop-blur-sm rounded-full border-1 border-solid border-gray-300 shadow-lg px-6 py-3 flex items-center justify-between">
             
             <a href="{{ route('home') }}" class="flex items-center space-x-2">
@@ -19,7 +19,7 @@
 
             <a href="#" class="hidden md:flex bg-green-500 hover:bg-green-600 text-white rounded-full px-6 py-2 items-center space-x-2 transition-transform hover:scale-105">
                 <span>Contact</span>
-                <span class="bg-white/30 rounded-full w-5 h-5 flex items-center justify-center text-xs">?</span>
+                {{-- <span class="bg-white/30 rounded-full w-5 h-5 flex items-center justify-center text-xs">?</span> --}}
             </a>
 
             <div class="md:hidden">

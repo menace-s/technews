@@ -22,10 +22,11 @@
     {{-- La Sidebar : pratique pour les catégories ou les actus récentes --}}
     {{-- On pourrait l'afficher conditionnellement, mais pour l'instant, on l'inclut --}}
     {{-- @include('front.partials.sidebar') --}}
-
+    
     {{-- Contenu principal : C'est ici que la magie opère ! --}}
     {{-- Chaque page remplira cette section avec son propre contenu. --}}
-    <main>
+    <main class="pt-12">
+        @include('front.partials.slider')
         @yield('content')
     </main>
 

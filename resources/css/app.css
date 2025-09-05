@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+
+/* On ajoute nos styles personnalisés pour les composants ici */
+@layer components {
+    .swiper-pagination-bullet {
+        @apply bg-green-800 opacity-50;
+    }
+    .swiper-pagination-bullet-active {
+        @apply bg-green-600 opacity-100;
+    }
+}
