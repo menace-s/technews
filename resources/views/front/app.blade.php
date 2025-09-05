@@ -10,6 +10,7 @@
     <title>@yield('title', 'Mon Super Site d\'Actus')</title>
 
     {{-- On inclut nos feuilles de style --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @include('front.partials.styles')
 
 </head>
@@ -20,7 +21,7 @@
 
     {{-- La Sidebar : pratique pour les catégories ou les actus récentes --}}
     {{-- On pourrait l'afficher conditionnellement, mais pour l'instant, on l'inclut --}}
-    @include('front.partials.sidebar')
+    {{-- @include('front.partials.sidebar') --}}
 
     {{-- Contenu principal : C'est ici que la magie opère ! --}}
     {{-- Chaque page remplira cette section avec son propre contenu. --}}
@@ -29,7 +30,7 @@
     </main>
 
     {{-- Le Footer : infos de contact, liens, etc. --}}
-    @include('front.partials.footer')
+    {{-- @include('front.partials.footer') --}}
 
     {{-- On inclut nos scripts JS juste avant la fin du body pour la performance --}}
     @include('front.partials.scripts')
