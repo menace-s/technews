@@ -22,4 +22,8 @@ class Category extends Model
             ->generateSlugsFrom('name') // génère le slug à partir du champ `name`
             ->saveSlugsTo('slug');      // stocke le résultat dans le champ `slug`
     }
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

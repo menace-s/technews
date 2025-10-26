@@ -19,19 +19,13 @@
     {{-- Le Header : notre navigation principale --}}
     @include('front.partials.header')
 
-    {{-- La Sidebar : pratique pour les catégories ou les actus récentes --}}
-    {{-- On pourrait l'afficher conditionnellement, mais pour l'instant, on l'inclut --}}
-    {{-- @include('front.partials.sidebar') --}}
-    
-    {{-- Contenu principal : C'est ici que la magie opère ! --}}
-    {{-- Chaque page remplira cette section avec son propre contenu. --}}
+
     <main class="pt-12">
-        @include('front.partials.slider')
+        
         @yield('content')
     </main>
 
-    {{-- Le Footer : infos de contact, liens, etc. --}}
-    {{-- @include('front.partials.footer') --}}
+
 
     {{-- On inclut nos scripts JS juste avant la fin du body pour la performance --}}
     @include('front.partials.scripts')

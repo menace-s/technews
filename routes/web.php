@@ -7,6 +7,8 @@ use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontCategoryController;
+use App\Http\Controllers\DetailController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [testController::class, 'index'])->name('home');
+Route::get('/article/{slug}', [DetailController::class, 'show'])->name('article.show');
+Route::get('/categorie/{slug}',[FrontCategoryController::class,'index'])->name('category.article');
 
 Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified','CheckRole:admin,author'])->name('dashboard');
 
