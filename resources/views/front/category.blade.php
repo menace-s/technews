@@ -108,7 +108,7 @@
                         @endif
 
                         {{-- Lien de lecture --}}
-                        <a href="{{ route('article.show', $article->slug) }}" 
+                        <a href="{{ route('article.detail', $article->slug) }}" 
                            class="inline-flex items-center space-x-2 text-green-600 font-semibold hover:text-green-700 group/link">
                             <span>Lire l'article</span>
                             <svg class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -112,7 +112,7 @@
                                         ></button>
                                     </div>
                                     <form
-                                        action="{{ route('author.update', $author->id) }}"
+                                        action="{{ route('admin.author.update', $author->id) }}"
                                         method="POST"
                                     >
                                         @csrf @method('PUT')
@@ -207,7 +207,7 @@
                                             Annuler
                                         </button>
                                         <form
-                                            action="{{ route('author.destroy', $author->id) }}"
+                                            action="{{ route('admin.author.destroy', $author->id) }}"
                                             method="POST"
                                             style="display: inline"
                                         >
@@ -266,7 +266,7 @@
             </div>
             {{-- Assurez-vous que la route existe et pointe vers la méthode
             `store` de votre AuthorController --}}
-            <form action="{{ route('author.store') }}" method="POST">
+            <form action="{{ route('admin.author.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

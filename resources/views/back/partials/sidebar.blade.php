@@ -14,8 +14,8 @@
                         <i class="bi bi-file-earmark-text-fill"></i> Articles
                     </a>
                     <ul class="collapse list-unstyled" id="articlesSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('article.index') }}">Tous les articles</a></li>
-                        <li><a class="nav-link ms-4" href="{{ route('article.create') }}">Ajouter un article</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('admin.article.index') }}">Tous les articles</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('admin.article.create') }}">Ajouter un article</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -29,7 +29,7 @@
                             <i class="bi bi-tags-fill"></i> Catégories
                         </a>
                         <ul class="collapse list-unstyled" id="categoriesSubmenu">
-                            <li><a class="nav-link ms-4" href="{{ route('category.index')}}">Toutes les catégories</a></li>
+                            <li><a class="nav-link ms-4" href="{{ route('admin.category.index')}}">Toutes les catégories</a></li>
                         </ul>
                     </li>
                 
@@ -38,7 +38,7 @@
                         <i class="bi bi-people-fill"></i> Auteurs
                     </a>
                     <ul class="collapse list-unstyled" id="authorsSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('author.index') }}">Tous les auteurs</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('admin.author.index') }}">Tous les auteurs</a></li>
                     </ul>
                 </li>
                 
@@ -47,7 +47,7 @@
                          <i class="bi bi-share-fill"></i> Médias Sociaux
                     </a>
                      <ul class="collapse list-unstyled" id="socialSubmenu">
-                        <li><a class="nav-link ms-4" href="{{ route('social-media.index') }}">Tous les médias</a></li>
+                        <li><a class="nav-link ms-4" href="{{ route('admin.social-media.index') }}">Tous les médias</a></li>
                         <li><a class="nav-link ms-4" href="add-social-media.html">Ajouter un média</a></li>
                     </ul>
                 </li>
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('settings.index') }}">
+                    <a class="nav-link" href="{{ route('admin.settings.index') }}">
                         <i class="bi bi-gear-fill"></i> Paramètres
                     </a>
                 </li>

@@ -14,7 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $authors = User::where('role', 'author')->get();
+        $authors =  User::whereHas('roles', function ($query) {
+            $query->where('name', 'author');
+            // OU si ta colonne s'appelle différemment :
+            // $query->where('role_name', 'author');
+        })->get();
         return view('back.author.index', compact('authors'));
     }
 

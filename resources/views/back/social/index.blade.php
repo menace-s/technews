@@ -77,7 +77,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     {{-- On adapte la route et les champs du formulaire --}}
-                                    <form action="{{ route('social-media.update', $social_media_item->id) }}" method="POST">
+                                    <form action="{{ route('admin.social-media.update', $social_media_item->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                        <form action="{{ route('social-media.destroy', $social_media_item->id) }}" method="POST">
+                                        <form action="{{ route('admin.social-media.destroy', $social_media_item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -151,7 +151,7 @@
                 <h5 class="modal-title">Ajouter un Média Social</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('social-media.store') }}" method="POST">
+            <form action="{{ route('admin.social-media.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">

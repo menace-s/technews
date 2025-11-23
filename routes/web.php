@@ -8,29 +8,71 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontCategoryController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DetailController;
 use Illuminate\Support\Facades\Route;
-
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [testController::class, 'index'])->name('home');
-Route::get('/article/{slug}', [DetailController::class, 'show'])->name('article.show');
-Route::get('/categorie/{slug}',[FrontCategoryController::class,'index'])->name('category.article');
+/*
+|--------------------------------------------------------------------------
+| ROUTES PUBLIQUES
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified','CheckRole:admin,author'])->name('dashboard');
+Route::get('/', [testController::class, 'index'])->name('home');
+Route::get('/article/{slug}', [DetailController::class, 'show'])->name('article.detail');
+Route::get('/categorie/{slug}', [FrontCategoryController::class, 'index'])->name('category.article');
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Profil
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'edit')->name('profile.edit');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+    });
+    
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->middleware('verified','CheckRole:admin,author')
+        ->name('dashboard');
+    
+    // Gestion articles (Admin + Author)
+    Route::middleware('CheckRole:admin,author')
+        ->prefix('admin')
+        ->name('admin.')
+        ->group(function () {
+            Route::resource('article', ArticleController::class);
+        });
 });
 
-Route::resource('/category',CategoryController::class)->middleware('admin');
-Route::resource('/article', ArticleController::class);
-Route::resource('/author',UserController::class)->middleware('admin');
-Route::resource('/social-media',SocialMediaController::class)->middleware('admin');
-Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index')->middleware('admin');
-Route::put('/settings', [\App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update')->middleware('admin');
+/*
+|--------------------------------------------------------------------------
+| ROUTES ADMIN
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('category', CategoryController::class);
+        Route::resource('author', UserController::class);
+        Route::resource('social-media', SocialMediaController::class);
+        
+        Route::controller(SettingsController::class)->group(function () {
+            Route::get('settings', 'index')->name('settings.index');
+            Route::put('settings', 'update')->name('settings.update');
+        });
+    });
+
+/*
+|--------------------------------------------------------------------------
+| ROUTES D'AUTHENTIFICATION
+|--------------------------------------------------------------------------
+*/
+
 require __DIR__.'/auth.php';

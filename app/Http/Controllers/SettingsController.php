@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Requests\SettingsRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -52,15 +53,32 @@ class SettingsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SettingsRequest $request, Settings $settings)
+    public function update(SettingsRequest $request)
     {
+        $settings = Settings::first();
+        
+        // Si aucun settings n'existe, le créer
+        if (!$settings) {
+            $settings = new Settings();
+        }
         $data= $request->validated();
+        // Gestion de l'upload du logo
         if ($request->hasFile('site_logo')) {
+            // Supprimer l'ancien logo s'il existe
+            if ($settings->site_logo && Storage::disk('public')->exists($settings->site_logo)) {
+                Storage::disk('public')->delete($settings->site_logo);
+            }
+            
+            // Stocker le nouveau logo
             $path = $request->file('site_logo')->store('settings', 'public');
             $data['site_logo'] = $path;
         }
-        $settings->update($data);
-        return redirect()->route('settings.index')->with('success', 'Paramètres mis à jour avec succès.');
+         // Mettre à jour ou créer
+        $settings->fill($data);
+        $settings->save();
+        
+        return redirect()->route('admin.settings.index')
+            ->with('success', 'Paramètres mis à jour avec succès.');
     }
 
     /**

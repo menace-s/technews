@@ -12,10 +12,10 @@
         
         {{-- Boutons d'action rapides --}}
         <div>
-            <a href="{{ route('article.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.article.index') }}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Retour
             </a>
-            <a href="{{ route('article.edit', $article) }}" class="btn btn-primary">
+            <a href="{{ route('admin.article.edit', $article) }}" class="btn btn-primary">
                 <i class="bi bi-pencil-square me-2"></i>Modifier
             </a>
         </div>

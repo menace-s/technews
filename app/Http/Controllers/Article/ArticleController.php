@@ -17,6 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // dd("hello");
         $user=Auth::user();
         if($user->hasRole('admin')) {
             // dd($user->roles);
@@ -32,13 +33,14 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-{
-    // 1. Exécute la requête pour récupérer les catégories actives
-    $categories = Category::where('isActive', 1)->get();
+    {
+        // dd("hello");
+        // 1. Exécute la requête pour récupérer les catégories actives
+        $categories = Category::where('isActive', 1)->get();
 
-    // 2. N’oublie pas de renvoyer la vue juste après
-    return view('back.article.create', compact('categories'));
-}
+        // 2. N’oublie pas de renvoyer la vue juste après
+        return view('back.article.create', compact('categories'));
+    }
 
 
     /**
@@ -66,7 +68,7 @@ public function store(StoreArticleRequest $request)
         $article->tag($tags); // On utilise la méthode du package sur l'objet $article
     }
 
-    return redirect()->route('article.index')->with('success', 'Article créé avec succès !');
+    return redirect()->route('admin.article.index')->with('success', 'Article créé avec succès !');
 }
 
     /**
@@ -125,7 +127,7 @@ public function store(StoreArticleRequest $request)
         }
 
         // 5. On redirige avec un message de succès.
-        return redirect()->route('article.index')->with('success', 'Article modifié avec succès !');
+        return redirect()->route('admin.article.index')->with('success', 'Article modifié avec succès !');
     }
 
     /**

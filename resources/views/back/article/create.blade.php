@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
             
-            <form action="{{ isset($article) ? route('article.update',$article) : route('article.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ isset($article) ? route('admin.article.update',$article) : route('admin.article.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($article))
                     @method('PUT')
@@ -114,7 +114,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-success">Enregistrer l'article</button>
-                <a href="{{ route('article.index') }}" class="btn btn-secondary ms-2">Annuler</a>
+                <a href="{{ route('admin.article.index') }}" class="btn btn-secondary ms-2">Annuler</a>
             </form>
         </div>
     </div>

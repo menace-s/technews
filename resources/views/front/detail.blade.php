@@ -28,7 +28,7 @@
             {{-- Catégorie et temps de lecture --}}
             <div class="flex items-center space-x-4 mb-4">
                 @if($article->category)
-                    <a href="{{ route('category.show', $article->category->slug) }}" 
+                    <a href="{{ route('category.article', $article->category->slug) }}" 
                        class="bg-green-100 text-green-600 px-4 py-1 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors">
                         {{ $article->category->name }}
                     </a>
@@ -105,7 +105,7 @@
         {{-- Navigation article précédent/suivant --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 pt-8 border-t border-gray-200">
             @if($previousArticle = \App\Models\Article::where('id', '<', $article->id)->orderBy('id', 'desc')->first())
-                <a href="{{ route('article.show', $previousArticle->slug) }}" 
+                <a href="{{ route('article.detail', $previousArticle->slug) }}" 
                    class="group bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl hover:shadow-lg transition-all">
                     <div class="flex items-center space-x-2 text-sm text-gray-500 mb-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +120,7 @@
             @endif
 
             @if($nextArticle = \App\Models\Article::where('id', '>', $article->id)->orderBy('id', 'asc')->first())
-                <a href="{{ route('article.show', $nextArticle->slug) }}" 
+                <a href="{{ route('article.detail', $nextArticle->slug) }}" 
                    class="group bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl hover:shadow-lg transition-all text-right">
                     <div class="flex items-center justify-end space-x-2 text-sm text-gray-500 mb-2">
                         <span>Article suivant</span>
@@ -149,7 +149,7 @@
                     <h2 class="text-3xl font-bold text-gray-900 mb-8">Articles similaires</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @foreach($relatedArticles as $related)
-                            <a href="{{ route('article.show', $related->slug) }}" 
+                            <a href="{{ route('article.detail', $related->slug) }}" 
                                class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all">
                                 <div class="h-40 bg-gradient-to-br from-green-100 to-green-200 overflow-hidden">
                                     @if($related->image)

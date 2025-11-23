@@ -33,7 +33,7 @@ class SocialMediaController extends Controller
     {
         $data= $request->validated();
         SocialMedia::create($data);
-        return redirect()->route('social-media.index')->with('success', 'Réseau social ajouté avec succès.');
+        return redirect()->route('admin.social-media.index')->with('success', 'Réseau social ajouté avec succès.');
     }
 
     /**
@@ -60,7 +60,7 @@ class SocialMediaController extends Controller
         $data = $request->validated();
         // dd($data);
         $social_medium->update($data);
-        return redirect()->route('social-media.index')->with('success', 'Réseau social mis à jour avec succès.');
+        return redirect()->route('admin.social-media.index')->with('success', 'Réseau social mis à jour avec succès.');
     }
 
     /**

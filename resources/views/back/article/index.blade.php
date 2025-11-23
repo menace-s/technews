@@ -8,7 +8,7 @@
     {{-- En-tête de la page --}}
     <div class="d-flex justify-content-between align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">Articles</h1>
-        <a href="{{ route('article.create') }}" class="btn btn-success">
+        <a href="{{ route('admin.article.create') }}" class="btn btn-success">
             <i class="bi bi-plus-circle-fill me-2"></i>Ajouter un article
         </a>
     </div>
@@ -71,12 +71,12 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a href="{{ route('article.show', $article) }}" class="dropdown-item">
+                                                <a href="{{ route('admin.article.show', $article) }}" class="dropdown-item">
                                                     <i class="bi bi-eye-fill me-2"></i>Voir
                                                 </a>
-                                            <li><a href="{{ route('article.edit', $article) }}" class="dropdown-item"><i class="bi bi-pencil-square me-2"></i>Modifier</a></li>
+                                            <li><a href="{{ route('admin.article.edit', $article) }}" class="dropdown-item"><i class="bi bi-pencil-square me-2"></i>Modifier</a></li>
                                             <li>
-                                                <form action="{{ route('article.destroy', $article) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');">
+                                                <form action="{{ route('admin.article.destroy', $article) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="dropdown-item text-danger"><i class="bi bi-trash-fill me-2"></i>Supprimer</button>

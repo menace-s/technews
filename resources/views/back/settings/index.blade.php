@@ -11,7 +11,7 @@
     {{-- Le formulaire doit pointer vers une route de mise à jour (ex: settings.update) --}}
     {{-- La méthode est PUT pour une mise à jour --}}
     {{-- enctype="multipart/form-data" est CRUCIAL pour l'upload de fichiers --}}
-    <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
